@@ -13,7 +13,7 @@ export interface Product {
   rating: Rating;
 }
 
-export type storeProducts = Product[];
+export type storeProducts = Product[] | null;
 
 export type Category = string;
 
