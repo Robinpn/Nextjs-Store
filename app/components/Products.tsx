@@ -1,8 +1,8 @@
 'use client';
-import { use, useState, useEffect } from 'react';
-import type { Product, storeProducts } from '../types';
+import { use, useEffect, useState } from 'react';
+import type { storeProducts } from '../types';
 import Image from 'next/image';
-import { Divide } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 
 const Products = ({ productsData }) => {
   const products: storeProducts = use(productsData);
@@ -10,14 +10,13 @@ const Products = ({ productsData }) => {
   const [filter, setFilter] = useState('');
   const [filteredProducts, setFilteredProducts] =
     useState<storeProducts>(products);
+  const router = useRouter();
 
-  useEffect(() => {
-    console.log('productId: ', productId);
-  }, [productId]);
+  const handleClick = (id: number) => {
+    router.push(`/Products/${id.toString()}`);
+  };
 
-  //   useEffect(() => {
-  //     products?.filter((product) => product.title.includes(filter));
-  //   }, [filter]);
+  console.log(productId);
 
   const handleInput = (event) => {
     const value = event.target.value;
@@ -39,14 +38,12 @@ const Products = ({ productsData }) => {
           className="bg-white text-black h-[30] w-[150] rounded-2xl p-3 flex justify-center items-center"
         />
       </div>
-      {filteredProducts?.map((product, index) => {
+      {filteredProducts?.map((product) => {
         return (
           <div
-            key={index}
+            key={product.id}
             className="max-w-[300px] max-h-[300px] border-2 border-b-white rounded-md flex flex-col justify-center items-center hover:cursor-pointer"
-            onClick={() => {
-              setProductid(product.id);
-            }}
+            onClick={() => handleClick(product.id)}
           >
             <h3>{product.title}</h3>
             <p>{product.id}</p>
