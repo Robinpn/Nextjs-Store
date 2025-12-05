@@ -1,4 +1,3 @@
-import { Suspense } from 'react';
 import { Product } from '@/app/types';
 import Image from 'next/image';
 
@@ -19,9 +18,12 @@ export default async function Page({
           src={product.image}
           width={120}
           height={120}
-          className="h-auto max-h-[150px] max-w-[150px] "
+          className="h-auto max-h-[150px] max-w-[150px] border-2 border-white rounded-2xl"
           alt="product image"
         />
+        <p>Rating: {product.rating.rate}</p>
+        <p>${product.price}</p>
+        <p>In stock: {product.rating.count}</p>
         <p>{product.description}</p>
       </div>
     </div>

@@ -46,7 +46,7 @@ const Products = ({ productsData }) => {
             onClick={() => handleClick(product.id)}
           >
             <h3>{product.title}</h3>
-            <p>{product.id}</p>
+            {/* <p>{product.id}</p> */}
             {/* <img
               src={product.image}
               alt="product image"
