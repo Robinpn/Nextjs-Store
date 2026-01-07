@@ -1,6 +1,7 @@
 import { Product } from '@/app/types';
 import Image from 'next/image';
-
+import { addToCart } from '@/app/utils/createUser';
+import { AddToCart } from '@/app/components/AddToCart';
 export default async function Page({
   params,
 }: {
@@ -9,6 +10,10 @@ export default async function Page({
   const { slug } = await params;
   const data = await fetch(`https://fakestoreapi.com/products/${slug}`);
   const product: Product = await data.json();
+
+  const handleClick = () => {
+    addToCart();
+  };
 
   return (
     <div className="h-screen w-full flex flex-col justify-center items-center">
@@ -21,10 +26,11 @@ export default async function Page({
           className="h-auto max-h-[150px] max-w-[150px] border-2 border-white rounded-2xl"
           alt="product image"
         />
-        <p>Rating: {product.rating.rate}</p>
+        <p className="text-red-500">Rating: {product.rating.rate}</p>
         <p>${product.price}</p>
         <p>In stock: {product.rating.count}</p>
         <p>{product.description}</p>
+        <AddToCart />
       </div>
     </div>
   );

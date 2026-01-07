@@ -49,7 +49,12 @@ export interface User {
   phone: string;
 }
 
+export interface userId {
+  id: string;
+}
+
 export interface CartProduct {
+  id: number;
   productId: number;
   quantity: number;
 }
@@ -60,3 +65,6 @@ export interface Cart {
   date: string;
   products: CartProduct[];
 }
+
+export type Carts = Cart[];
+export type CartProducts = CartProduct[];
