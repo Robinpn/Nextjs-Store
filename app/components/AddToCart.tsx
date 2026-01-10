@@ -1,32 +1,35 @@
 'use client';
-import React, { useEffect } from 'react';
-import { addToCart, getSingleCart } from '../utils/createUser';
+import React from 'react';
+import { useCart } from '../contexts/CartContext';
+import type { Product, CartProduct } from '../types';
 
-export const AddToCart = () => {
-  const [pressed, setPressed] = React.useState(false);
-  const [cart, setCart] = React.useState(null);
+interface AddToCartProps {
+  product: Product;
+}
 
-  useEffect(() => {
-    const getCart = async () => {
-      const cart = await getSingleCart(1);
-      setCart(cart);
-    };
+export const AddToCart = ({ product }: AddToCartProps) => {
+  const { addToCart, cart } = useCart();
 
-    getCart();
-  }, [pressed]);
+  const handleAdd = () => {
+    // const item: CartProduct = {
+    //   id: product.id,
+    //   productId: product.id,
+    //   quantity: 1,
+    // };
 
-  console.log('cart: ', cart);
+    addToCart(product);
+
+    console.log('cart', cart);
+  };
+
   return (
     <div>
       <button
-        onClick={() => {
-          addToCart();
-        }}
+        className="h-14 w-28 rounded-2xl bg-green-900 hover:cursor-pointer"
+        onClick={handleAdd}
       >
         Add to cart
       </button>
-
-      <button onClick={() => setPressed(true)}>Get Cart</button>
     </div>
   );
 };

@@ -1,6 +1,6 @@
 'use client';
 import React, { createContext, useState, useContext } from 'react';
-import type { CartProduct, CartProducts } from '../types';
+import type { CartProduct, CartProducts, Product } from '../types';
 
 interface CartContextType {
   children: React.ReactNode;
@@ -8,7 +8,7 @@ interface CartContextType {
 
 interface CartContextValue {
   cart: CartProducts;
-  addToCart: (item: CartProduct) => void;
+  addToCart: (item: Product) => void;
   removeFromCart: (itemId: number) => void;
   clearCart: () => void;
 }
@@ -28,7 +28,7 @@ export const useCart = () => {
 export const CartProvider = ({ children }: CartContextType) => {
   const [cart, setCart] = useState<CartProducts>([]);
 
-  const addToCart = (item: CartProduct) => {
+  const addToCart = (item: Product) => {
     setCart((prevCart) => [...prevCart, item]);
   };
 

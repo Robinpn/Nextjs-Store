@@ -67,4 +67,4 @@ export interface Cart {
 }
 
 export type Carts = Cart[];
-export type CartProducts = CartProduct[];
+export type CartProducts = Product[];
