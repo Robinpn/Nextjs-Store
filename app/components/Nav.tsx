@@ -18,7 +18,7 @@ export const Nav = () => {
           products
         </Link>
         <div className="flex flex-row relative w-8 h-8 items-center justify-center">
-          <Link href={'/cart'} className="">
+          <Link href={'/Cart'} className="">
             <ShoppingCart size={20} />
           </Link>
           {cart.length >= 1 ? (

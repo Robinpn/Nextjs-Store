@@ -11,12 +11,6 @@ export const AddToCart = ({ product }: AddToCartProps) => {
   const { addToCart, cart } = useCart();
 
   const handleAdd = () => {
-    // const item: CartProduct = {
-    //   id: product.id,
-    //   productId: product.id,
-    //   quantity: 1,
-    // };
-
     addToCart(product);
 
     console.log('cart', cart);

@@ -9,7 +9,7 @@ interface CartContextType {
 interface CartContextValue {
   cart: CartProducts;
   addToCart: (item: Product) => void;
-  removeFromCart: (itemId: number) => void;
+  removeFromCart: (item: Product) => void;
   clearCart: () => void;
 }
 
@@ -29,11 +29,30 @@ export const CartProvider = ({ children }: CartContextType) => {
   const [cart, setCart] = useState<CartProducts>([]);
 
   const addToCart = (item: Product) => {
-    setCart((prevCart) => [...prevCart, item]);
+    setCart((prevCart) => {
+      const existing = prevCart.find((p) => p.id === item.id);
+
+      if (existing) {
+        return prevCart.map((p) =>
+          p.id === item.id ? { ...p, quantity: (p.quantity || 0) + 1 } : p,
+        );
+      }
+
+      return [...prevCart, { ...item, quantity: 1 }];
+    });
   };
 
-  const removeFromCart = (itemId: number) => {
-    setCart((prevCart) => prevCart.filter((item) => item.id !== itemId));
+  const removeFromCart = (item: Product) => {
+    setCart((prevCart) => {
+      const existing = prevCart.filter((product) => product.quantity > 1);
+
+      if (existing) {
+        return existing.map((p) =>
+          p.id === item.id ? { ...p, quantity: (p.quantity || 0) - 1 } : p,
+        );
+      }
+      return prevCart.filter((j) => j.id !== item.id);
+    });
   };
 
   const clearCart = () => {

@@ -11,6 +11,7 @@ export interface Product {
   category: string;
   image: string;
   rating: Rating;
+  quantity: number;
 }
 
 export type storeProducts = Product[] | null;
@@ -55,7 +56,12 @@ export interface userId {
 
 export interface CartProduct {
   id: number;
-  productId: number;
+  title: string;
+  price: number;
+  description: string;
+  category: string;
+  image: string;
+  rating: Rating;
   quantity: number;
 }
 
