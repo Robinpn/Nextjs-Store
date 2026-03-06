@@ -1,12 +1,12 @@
 'use client';
-import { useEffect, useReducer, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useCart } from '../contexts/CartContext';
 import type { Product } from '../types';
 import { Purchase } from './Purchase';
 
 export default function CartComponent() {
   const { cart, removeFromCart, clearCart, addToCart } = useCart();
-  const [totalPrice, setTotalPrice] = useState(0);
+  const [totalAmount, setTotalAmount] = useState(0);
 
   const handleRemove = (item: Product) => {
     removeFromCart(item);
@@ -18,12 +18,16 @@ export default function CartComponent() {
 
   useEffect(() => {
     const handlePrice = () => {
-      const totalNum = cart.reduce((acc, current) => acc + current.price, 0);
-      setTotalPrice(totalNum);
+      const totalNum = cart.reduce(
+        (acc, current) => acc + current.price * current.quantity,
+        0,
+      );
+      setTotalAmount(totalNum);
     };
 
     handlePrice();
   }, [cart]);
+
   return (
     <div className="h-screen w-full flex flex-col items-center justify-center gap-4">
       {cart.length < 1 ? (
@@ -76,11 +80,11 @@ export default function CartComponent() {
           <div className="mt-4">
             <Purchase />
           </div>
+          <p className="mt-4">Total price: ${totalAmount}</p>
         </div>
       ) : (
         <></>
       )}
-      <p>Total price: ${totalPrice}</p>
     </div>
   );
 }
