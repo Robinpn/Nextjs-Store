@@ -13,7 +13,7 @@ export const Purchase = () => {
 
     setTimeout(() => {
       setIsLoading(false);
-      clearCart();
+      // clearCart();
       redirect('/EndScreen');
     }, 1500);
   };
