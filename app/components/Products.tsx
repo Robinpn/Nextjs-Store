@@ -1,5 +1,5 @@
 'use client';
-import { use, useState } from 'react';
+import { use, useEffect, useState } from 'react';
 import type { storeProducts } from '../types';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
@@ -32,8 +32,21 @@ const Products = ({ productsData }) => {
   };
 
   const handleCategory = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedCategory(event.target.value);
+    const value = event.target.value;
+    setSelectedCategory(value);
+
+    const productsByCategory = products?.filter(
+      (products) => products.category === value,
+    );
+
+    if (value != 'category') {
+      // @ts-expect-error fix later
+      setFilteredProducts(productsByCategory);
+    } else {
+      setFilteredProducts(products);
+    }
   };
+
   return (
     <div className="flex flex-col items-center justify-center gap-4 w-full">
       <div className="flex flex-row gap-4 items-center justify-center">
@@ -69,15 +82,16 @@ const Products = ({ productsData }) => {
           return (
             <div
               key={product.id}
-              className="max-w-[300px] max-h-[300px] border-2 border-b-white rounded-md flex flex-col justify-center items-center hover:cursor-pointer"
+              className="max-w-[320px] max-h-[320px] border-2 border-b-white rounded-md flex flex-col justify-center items-center hover:cursor-pointer"
               onClick={() => handleClick(product.id)}
             >
               <h3>{product.title}</h3>
               <Image
+                loading="eager"
                 src={product.image}
-                width={120}
-                height={120}
-                className="h-auto max-h-[150px] max-w-[150px] "
+                width={125}
+                height={125}
+                className="w-auto h-auto"
                 alt="product image"
               />
               <p>{product.category}</p>
