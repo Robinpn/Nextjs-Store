@@ -1,8 +1,9 @@
 'use client';
-import { use, useState, useEffect } from 'react';
+import { use, useState } from 'react';
 import type { storeProducts } from '../types';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import { read } from 'fs';
 
 const Products = ({ productsData }) => {
   const products: storeProducts = use(productsData);
@@ -10,25 +11,16 @@ const Products = ({ productsData }) => {
   const [filter, setFilter] = useState('');
   const [filteredProducts, setFilteredProducts] =
     useState<storeProducts>(products);
-  const [selectedCategory, setSelectedCategory] = useState('category');
+  const [selectedCategory, setSelectedCategory] = useState('');
   const router = useRouter();
 
-  const categoryAmount = new Set<string>();
-  useEffect(() => {
-    products?.map((product) => {
-      categoryAmount.add(product.category);
-    });
-  }, []);
-
-  console.log('categories: ', categoryAmount);
+  const categories = [...new Set(products?.map((p) => p.category) || [])];
 
   const handleClick = (id: number) => {
     router.push(`/Products/${id.toString()}`);
   };
 
-  console.log(productId);
-
-  const handleInput = (event) => {
+  const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
     setFilter(value);
     const hej = products?.filter((product) => product.title.includes(filter));
@@ -37,6 +29,10 @@ const Products = ({ productsData }) => {
     if (value == '') {
       setFilteredProducts(products);
     }
+  };
+
+  const handleCategory = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedCategory(event.target.value);
   };
   return (
     <div className="flex flex-col items-center justify-center gap-4 w-full">
@@ -47,25 +43,22 @@ const Products = ({ productsData }) => {
           onChange={handleInput}
           className="bg-white text-black h-[30] w-[150] rounded-2xl p-3 flex justify-center items-center"
         />
-        {categoryAmount.size > 0 ? (
+        {categories.length > 0 ? (
           <select
             name="category"
             id="category"
             defaultValue="category"
+            onChange={handleCategory}
             className="bg-gray-900 w-36 h-10 rounded-2xl text-center"
           >
             <option value="category">category</option>
-            {Array.from(categoryAmount).map((category) => {
+            {categories.map((category) => {
               return (
                 <option key={category} value={category}>
                   {category}
                 </option>
               );
             })}
-            {/* <option value="volvo">Volvo</option>
-          <option value="saab">Saab</option>
-          <option value="opel">Opel</option>
-          <option value="audi">Audi</option> */}
           </select>
         ) : (
           <p>Loading</p>
@@ -80,12 +73,6 @@ const Products = ({ productsData }) => {
               onClick={() => handleClick(product.id)}
             >
               <h3>{product.title}</h3>
-              {/* <p>{product.id}</p> */}
-              {/* <img
-              src={product.image}
-              alt="product image"
-              className="h-auto max-h-[150px] max-w-[150px] "
-              /> */}
               <Image
                 src={product.image}
                 width={120}
