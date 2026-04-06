@@ -1,13 +1,12 @@
 'use client';
-import { use, useEffect, useState } from 'react';
+import { use, useState } from 'react';
 import type { storeProducts } from '../types';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { read } from 'fs';
 
 const Products = ({ productsData }) => {
   const products: storeProducts = use(productsData);
-  const [productId, setProductid] = useState(0);
+
   const [filter, setFilter] = useState('');
   const [filteredProducts, setFilteredProducts] =
     useState<storeProducts>(products);
@@ -46,6 +45,8 @@ const Products = ({ productsData }) => {
       setFilteredProducts(products);
     }
   };
+
+  console.log('products: ', products);
 
   return (
     <div className="flex flex-col items-center justify-center gap-4 w-full">
