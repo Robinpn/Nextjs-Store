@@ -1,9 +1,15 @@
 export const getProducts = async () => {
-  const response = await fetch('https://fakestoreapi.com/products');
+  try {
+    const response = await fetch('https://fakestoreapi.com/products');
 
-  if (!response.ok) {
-    throw new Error('Unable to fetch products, pls come back later');
+    if (!response.ok) {
+      throw new Error('Unable to fetch products, pls come back later');
+    }
+
+    const products = await response.json();
+    return products;
+  } catch (error) {
+    console.error(error);
+    throw error;
   }
-  const products = await response.json();
-  return products;
 };

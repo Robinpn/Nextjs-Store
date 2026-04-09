@@ -1,5 +1,4 @@
 'use client';
-import { clear } from 'console';
 import { useCart } from '../contexts/CartContext';
 import { useEffect, useRef } from 'react';
 
@@ -19,12 +18,12 @@ export default function Page() {
   return (
     <div className="w-full h-screen flex flex-col justify-center items-center gap-4">
       <h1>Thanks for shopping at fake store, hope to see you soon!</h1>
-      <div className="flex flex-col items-center justify-center gap-4 bg-gray-300 text-black">
+      <div className="flex flex-col items-center justify-center gap-4">
         {cart.map((product) => {
           return (
             <div
               key={product.id}
-              className="flex flex-col border-b-2 gap-4 max-w-52"
+              className="flex flex-col border-b-2 gap-4 w-52  bg-gray-900"
             >
               <h2>{product.title}</h2>
               <img

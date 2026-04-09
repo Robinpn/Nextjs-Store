@@ -83,7 +83,7 @@ const Products = ({ productsData }) => {
           return (
             <div
               key={product.id}
-              className="max-w-[320px] max-h-[320px] border-2 border-b-white rounded-md flex flex-col justify-center items-center hover:cursor-pointer"
+              className="w-80 h-80 bg-gray-900 rounded-md flex flex-col justify-center items-center hover:cursor-pointer"
               onClick={() => handleClick(product.id)}
             >
               <h3>{product.title}</h3>

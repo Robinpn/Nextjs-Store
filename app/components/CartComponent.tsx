@@ -37,7 +37,7 @@ export default function CartComponent() {
           return (
             <div
               key={cartItem.id}
-              className="flex flex-col w-2xs min-h-[300px] justify-center items-center"
+              className="flex flex-col w-2xs h-auto justify-center items-center bg-gray-900"
             >
               <h2>{cartItem.title}</h2>
               <img
@@ -59,7 +59,7 @@ export default function CartComponent() {
                 </button>
                 <button
                   onClick={() => handleAdd(cartItem)}
-                  className="rounded-md bg-green-600 py-2 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-green-700 focus:shadow-none active:bg-green-700 hover:bg-green-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none ml-2"
+                  className="rounded-md bg-green-600 py-2 px-4 mb-2 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-green-700 focus:shadow-none active:bg-green-700 hover:bg-green-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none ml-2"
                 >
                   +
                 </button>

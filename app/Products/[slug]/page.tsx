@@ -12,19 +12,21 @@ export default async function Page({
 
   return (
     <div className="h-screen w-full flex flex-col justify-center items-center">
-      <div className="flex flex-col gap-4 w-3xs">
+      <div className="w-80 flex flex-col gap-2 justify-center items-center">
         <h1>{product?.title}</h1>
         <Image
           src={product.image}
-          width={120}
-          height={120}
-          className="h-auto max-h-[150px] max-w-[150px] border-2 border-white rounded-2xl"
+          width={300}
+          height={300}
+          className="h-auto w-auto rounded-2xl"
           alt="product image"
         />
         <p className="text-amber-300">Rating: {product.rating.rate}</p>
         <p>${product.price}</p>
         <p>In stock: {product.rating.count}</p>
         <p>{product.description}</p>
+      </div>
+      <div className="mt-3.5">
         <AddToCart product={product} />
       </div>
     </div>

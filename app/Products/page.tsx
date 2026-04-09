@@ -3,7 +3,7 @@ import { ErrorBoundary } from 'next/dist/client/components/error-boundary';
 import Products from '../components/Products';
 import { LoaderCircle } from 'lucide-react';
 import { getProducts } from '../utils/getProducts';
-import Error from './Error';
+import Error from '../error';
 
 export default function Home() {
   const productPromise = getProducts();
