@@ -14,7 +14,7 @@ export interface Product {
   quantity: number;
 }
 
-export type storeProducts = Product[] | null;
+export type storeProducts = Product[] | null | undefined;
 
 export type Category = string;
 

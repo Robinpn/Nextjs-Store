@@ -9,7 +9,7 @@ export const Nav = () => {
 
   return (
     <div className="max-w-screen min-h-16 flex flex-row items-center justify-between bg-blend-darken">
-      <div>Logo</div>
+      <div className="ml-1">FakeStore</div>
       <div className="flex flex-row items-center relative justify-between mr-4 w-[300px]">
         <Link href={'/'} className="">
           Home

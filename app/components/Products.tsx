@@ -4,7 +4,11 @@ import type { storeProducts } from '../types';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
-const Products = ({ productsData }) => {
+const Products = ({
+  productsData,
+}: {
+  productsData: Promise<storeProducts>;
+}) => {
   const products: storeProducts = use(productsData);
 
   const [filter, setFilter] = useState('');
@@ -22,8 +26,10 @@ const Products = ({ productsData }) => {
   const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
     setFilter(value);
-    const hej = products?.filter((product) => product.title.includes(filter));
-    setFilteredProducts(hej);
+    const filteredProducts = products?.filter((product) =>
+      product.title.includes(filter),
+    );
+    setFilteredProducts(filteredProducts);
 
     if (value == '') {
       setFilteredProducts(products);
@@ -39,7 +45,6 @@ const Products = ({ productsData }) => {
     );
 
     if (value != 'category') {
-      // @ts-expect-error fix later
       setFilteredProducts(productsByCategory);
     } else {
       setFilteredProducts(products);
