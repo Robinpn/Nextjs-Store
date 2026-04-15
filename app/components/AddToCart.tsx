@@ -1,19 +1,16 @@
 'use client';
-import React from 'react';
 import { useCart } from '../contexts/CartContext';
-import type { Product, CartProduct } from '../types';
+import type { Product } from '../types';
 
 interface AddToCartProps {
   product: Product;
 }
 
 export const AddToCart = ({ product }: AddToCartProps) => {
-  const { addToCart, cart } = useCart();
+  const { addToCart } = useCart();
 
   const handleAdd = () => {
     addToCart(product);
-
-    console.log('cart', cart);
   };
 
   return (

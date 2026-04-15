@@ -1,6 +1,6 @@
 'use client';
 import React, { createContext, useState, useContext } from 'react';
-import type { CartProduct, CartProducts, Product } from '../types';
+import type { CartProducts, Product } from '../types';
 
 interface CartContextType {
   children: React.ReactNode;

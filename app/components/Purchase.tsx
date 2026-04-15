@@ -6,14 +6,12 @@ import { useCart } from '../contexts/CartContext';
 
 export const Purchase = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const { clearCart } = useCart();
 
   const handleClick = () => {
     setIsLoading(true);
 
     setTimeout(() => {
       setIsLoading(false);
-      // clearCart();
       redirect('/EndScreen');
     }, 1500);
   };

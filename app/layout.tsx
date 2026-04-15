@@ -2,7 +2,6 @@ import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import { CartProvider } from './contexts/CartContext';
 import { Nav } from './components/Nav';
-// @ts-expect-error can't find css file for some reason, but works
 import './globals.css';
 
 const geistSans = Geist({
