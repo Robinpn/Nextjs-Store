@@ -2,22 +2,16 @@
 import { use, useState } from 'react';
 import type { storeProducts } from '../types';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
+import { notFound, useRouter } from 'next/navigation';
 
-const Products = ({
-  productsData,
-}: {
-  productsData: Promise<storeProducts>;
-}) => {
-  const products: storeProducts = use(productsData);
-
+const Products = ({ productsData }: { productsData: storeProducts }) => {
   const [filter, setFilter] = useState('');
   const [filteredProducts, setFilteredProducts] =
-    useState<storeProducts>(products);
+    useState<storeProducts>(productsData);
   const [selectedCategory, setSelectedCategory] = useState('');
   const router = useRouter();
 
-  const categories = [...new Set(products?.map((p) => p.category) || [])];
+  const categories = [...new Set(productsData?.map((p) => p.category) || [])];
 
   const handleClick = (id: number) => {
     router.push(`/Products/${id.toString()}`);
@@ -26,13 +20,13 @@ const Products = ({
   const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
     setFilter(value);
-    const filteredProducts = products?.filter((product) =>
+    const filteredProducts = productsData?.filter((product) =>
       product.title.includes(filter),
     );
     setFilteredProducts(filteredProducts);
 
     if (value == '') {
-      setFilteredProducts(products);
+      setFilteredProducts(productsData);
     }
   };
 
@@ -40,18 +34,18 @@ const Products = ({
     const value = event.target.value;
     setSelectedCategory(value);
 
-    const productsByCategory = products?.filter(
+    const productsByCategory = productsData?.filter(
       (products) => products.category === value,
     );
 
     if (value != 'category') {
       setFilteredProducts(productsByCategory);
     } else {
-      setFilteredProducts(products);
+      setFilteredProducts(productsData);
     }
   };
 
-  console.log('products: ', products);
+  console.log('products: ', productsData);
 
   return (
     <div className="flex flex-col items-center justify-center gap-4 w-full">
