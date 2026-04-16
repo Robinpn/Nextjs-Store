@@ -3,6 +3,7 @@ import Products from '../components/Products';
 import { LoaderCircle } from 'lucide-react';
 import { getProducts } from '../utils/getProducts';
 
+export const dynamic = 'force-dynamic';
 export default async function Home() {
   const productPromise = await getProducts();
   return (
