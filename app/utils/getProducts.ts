@@ -10,7 +10,8 @@ export const getProducts = async () => {
     const products = await response.json();
     return products;
   } catch (error) {
-    console.error(error);
-    return [];
+    throw new Error('Unable to fetch products, pls come back later');
+    // console.error(error);
+    // return [];
   }
 };
