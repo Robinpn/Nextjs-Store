@@ -1,8 +1,8 @@
 'use client';
-import { use, useState } from 'react';
+import { useState } from 'react';
 import type { storeProducts } from '../types';
 import Image from 'next/image';
-import { notFound, useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 
 const Products = ({ productsData }: { productsData: storeProducts }) => {
   const [filter, setFilter] = useState('');

@@ -1,6 +1,4 @@
-import { Suspense } from 'react';
 import Products from '../components/Products';
-import { LoaderCircle } from 'lucide-react';
 import { getProducts } from '../utils/getProducts';
 
 export const dynamic = 'force-dynamic';
